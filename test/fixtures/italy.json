@@ -1,0 +1,69 @@
+{
+  "stops": [
+    {
+      "name": "Turin, Italy",
+      "coordinates": {
+        "lat": 45.075777,
+        "lon": 7.667478
+      }
+    },
+    {
+      "name": "Milan, Italy",
+      "coordinates": {
+        "lat": 45.416119,
+        "lon": 9.183591
+      }
+    },
+    {
+      "name": "Bologna, Italy",
+      "coordinates": {
+        "lat": 44.48311,
+        "lon": 11.292966
+      }
+    },
+    {
+      "name": "Perugia, Italy",
+      "coordinates": {
+        "lat": 42.9105,
+        "lon": 12.721189
+      }
+    },
+    {
+      "name": "Catanzaro, Italy",
+      "coordinates": {
+        "lat": 38.927715,
+        "lon": 16.588376
+      },
+      "pin": "hotel"
+    },
+    {
+      "name": "Brindisi, Italy",
+      "coordinates": {
+        "lat": 40.616378,
+        "lon": 17.928708
+      },
+      "pin": "tent"
+    },
+    {
+      "name": "Isère, France",
+      "coordinates": {
+        "lat": 45.1688,
+        "lon": 5.755857
+      }
+    },
+    {
+      "name": "Naples, Italy",
+      "coordinates": {
+        "lat": 40.832854,
+        "lon": 14.215329
+      }
+    },
+    {
+      "name": "Bari, Italy",
+      "coordinates": {
+        "lat": 40.816227,
+        "lon": 16.588376
+      }
+    }
+  ]
+}

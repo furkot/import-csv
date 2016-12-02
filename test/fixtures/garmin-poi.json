@@ -1,0 +1,15 @@
+{
+  "stops": [{
+    "coordinates": { "lat": 36.35431, "lon": -94.50095 },
+    "name": "Roaring River State Park",
+    "notes": "Light-colored worms"
+  }, {
+    "coordinates": { "lat": 37.43547, "lon": -92.51394 },
+    "name": "Bennett Spring State Park",
+    "notes": "Maribu jigs"
+  }, {
+    "coordinates": { "lat": 38.81227, "lon": -94.76416 },
+    "name": "Garmin",
+    "notes": "1200 E. 151 St."
+  }]
+}
