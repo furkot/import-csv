@@ -15,7 +15,7 @@
     "furkot"
   ],
   "dependencies": {
-    "csv": "^1.1.0"
+    "csv-parse": "^1.1.7"
   },
   "devDependencies": {
     "jshint": "^2.9.4",
