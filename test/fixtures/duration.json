@@ -1,0 +1,40 @@
+{
+  "stops": [
+    {
+      "name": "Perugia, Italy",
+      "coordinates": {
+        "lat": 42.9105,
+        "lon": 12.721189
+      }
+    },
+    {
+      "name": "Catanzaro, Italy",
+      "coordinates": {
+        "lat": 38.927715,
+        "lon": 16.588376
+      }
+    },
+    {
+      "name": "Brindisi, Italy",
+      "coordinates": {
+        "lat": 40.616378,
+        "lon": 17.928708
+      }
+    },
+    {
+      "name": "Naples, Italy",
+      "duration": 1962000,
+      "coordinates": {
+        "lat": 40.832854,
+        "lon": 14.215329
+      }
+    },
+    {
+      "name": "Bari, Italy",
+      "coordinates": {
+        "lat": 40.816227,
+        "lon": 16.588376
+      }
+    }
+  ]
+}
