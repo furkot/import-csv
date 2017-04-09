@@ -37,6 +37,7 @@ CSV files imported by Furkot are expected to have following fields:
 - `url` - place url; optional
 - `notes` - place description up to 256 characters; optional
 - `pin` - icon representing the place, from the list of Furkot [icons]; optional
+- `duration` - stop duration in minutes; optional
 
 If the first line of the imported file contains the names, fields can be in any order and only
 mandatory ones need to be present. In the absence of the header line with field names, fields in the
