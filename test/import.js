@@ -37,6 +37,17 @@ describe('furkot import csv', function() {
     });
   });
 
+  it('should parse csv without coordinates', function(done) {
+    var stream = fs.createReadStream(__dirname + '/fixtures/no-coords-cap-header.csv');
+    parse(stream, function(err, trip) {
+      var expected = require('./fixtures/no-coords-cap-header.json');
+      should.exist(trip);
+      should.not.exist(err);
+      trip.should.eql(expected);
+      done();
+    });
+  });
+
   it('should parse csv in Garmin custom POI format', function(done) {
     var stream = fs.createReadStream(__dirname + '/fixtures/garmin-poi.csv');
     parse(stream, function(err, trip) {
