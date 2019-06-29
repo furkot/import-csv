@@ -1,0 +1,4 @@
+"From","From Address","To","To Address","Departure Date","Departure Time","Arrival Date","Arrival Time","Driving Time","Distance","Total Driving Time","Total Distance","Notes"
+"France","10 Rue Saint-étienne, Le Blanc, Indre, France","Argenton-sur-Creuse","7 Rue Gambetta, Argenton-sur-Creuse, Indre, France","2019-05-27","09:00","2019-05-27","09:34","34m","39.7","34m","39.7",""
+"Argenton-sur-Creuse","7 Rue Gambetta, Argenton-sur-Creuse, Indre, France","La Châtre","9 Rue De Bellefond, La Châtre, Indre, France","2019-05-27","09:39","2019-05-27","10:12","33m","39.2","1h 7m","78.9",""
+"La Châtre","9 Rue De Bellefond, La Châtre, Indre, France","Le Cher","Vallon-en-Sully, Allier, France","2019-05-27","10:22","2019-05-27","11:11","48m","56.7","1h 56m","135.6","this stop has description"

@@ -59,6 +59,17 @@ describe('furkot import csv', function() {
     });
   });
 
+  it('should parse driving log csv', function(done) {
+    var stream = fs.createReadStream(__dirname + '/fixtures/driving-log.csv');
+    parse(stream, function(err, trip) {
+      var expected = require('./fixtures/driving-log.json');
+      should.exist(trip);
+      should.not.exist(err);
+      trip.should.eql(expected);
+      done();
+    });
+  });
+
   it('should parse invalid csv', function(done) {
     var stream = fs.createReadStream(__dirname + '/fixtures/invalid.csv');
     parse(stream, function(err, trip) {

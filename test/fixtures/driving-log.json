@@ -1,0 +1,20 @@
+{
+  "stops": [{
+    "name": "France",
+    "address": "10 Rue Saint-étienne, Le Blanc, Indre, France",
+    "duration": 0
+  }, {
+    "name": "Argenton-sur-Creuse",
+    "address": "7 Rue Gambetta, Argenton-sur-Creuse, Indre, France",
+    "duration": 300000 
+  }, {
+    "name": "La Châtre",
+    "address": "9 Rue De Bellefond, La Châtre, Indre, France",
+    "duration": 600000,
+    "notes": "this stop has description"
+  }, {
+    "name": "Le Cher",
+    "address": "Vallon-en-Sully, Allier, France",
+    "duration": 0
+  }]
+}
