@@ -70,10 +70,43 @@ describe('furkot import csv', function() {
     });
   });
 
-  it('should parse invalid csv', function(done) {
+  it('should parse empty csv', function(done) {
+    var stream = fs.createReadStream(__dirname + '/fixtures/empty.csv');
+    parse(stream, function(err, trip) {
+      should.not.exist(err);
+      trip.should.eql({});
+      done();
+    });
+  });
+
+  it('should parse empty driving log csv', function(done) {
+    var stream = fs.createReadStream(__dirname + '/fixtures/empty-driving-log.csv');
+    parse(stream, function(err, trip) {
+      should.not.exist(err);
+      trip.should.eql({});
+      done();
+    });
+  });
+
+  it('should raise error on unquoted csv file', function(done) {
+    var stream = fs.createReadStream(__dirname + '/fixtures/unquoted.csv');
+    parse(stream, function(err, trip) {
+      should.exist(err);
+      err.should.have.property('err', 'invalid');
+      err.should.have.property('message');
+      err.should.not.have.property('status');
+      should.not.exist(trip);
+      done();
+    });
+  });
+
+  it('should raise error on invalid csv file', function(done) {
     var stream = fs.createReadStream(__dirname + '/fixtures/invalid.csv');
     parse(stream, function(err, trip) {
       should.exist(err);
+      err.should.have.property('err', 'invalid');
+      err.should.have.property('message');
+      err.should.not.have.property('status');
       should.not.exist(trip);
       done();
     });
