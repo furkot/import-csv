@@ -1,10 +1,11 @@
+var { describe, it } = require('node:test');
 var should = require('should');
 var fs = require('fs');
 var parse = require('..');
 
 describe('furkot import csv', function() {
 
-  it('should parse csv', function(done) {
+  it('should parse csv', function(t, done) {
     var stream = fs.createReadStream(__dirname + '/fixtures/italy.csv');
     parse(stream, function(err, trip) {
       var expected = require('./fixtures/italy.json');
@@ -15,7 +16,7 @@ describe('furkot import csv', function() {
     });
   });
 
-  it('should parse csv without header', function(done) {
+  it('should parse csv without header', function(t, done) {
     var stream = fs.createReadStream(__dirname + '/fixtures/italy-no-header.csv');
     parse(stream, function(err, trip) {
       var expected = require('./fixtures/italy.json');
@@ -26,7 +27,7 @@ describe('furkot import csv', function() {
     });
   });
 
-  it('should parse csv with duration', function(done) {
+  it('should parse csv with duration', function(t, done) {
     var stream = fs.createReadStream(__dirname + '/fixtures/duration.csv');
     parse(stream, function(err, trip) {
       var expected = require('./fixtures/duration.json');
@@ -37,7 +38,7 @@ describe('furkot import csv', function() {
     });
   });
 
-  it('should parse csv without coordinates', function(done) {
+  it('should parse csv without coordinates', function(t, done) {
     var stream = fs.createReadStream(__dirname + '/fixtures/no-coords-cap-header.csv');
     parse(stream, function(err, trip) {
       var expected = require('./fixtures/no-coords-cap-header.json');
@@ -48,7 +49,7 @@ describe('furkot import csv', function() {
     });
   });
 
-  it('should parse csv in Garmin custom POI format', function(done) {
+  it('should parse csv in Garmin custom POI format', function(t, done) {
     var stream = fs.createReadStream(__dirname + '/fixtures/garmin-poi.csv');
     parse(stream, function(err, trip) {
       var expected = require('./fixtures/garmin-poi.json');
@@ -59,7 +60,7 @@ describe('furkot import csv', function() {
     });
   });
 
-  it('should parse driving log csv', function(done) {
+  it('should parse driving log csv', function(t, done) {
     var stream = fs.createReadStream(__dirname + '/fixtures/driving-log.csv');
     parse(stream, function(err, trip) {
       var expected = require('./fixtures/driving-log.json');
@@ -70,7 +71,7 @@ describe('furkot import csv', function() {
     });
   });
 
-  it('should parse empty csv', function(done) {
+  it('should parse empty csv', function(t, done) {
     var stream = fs.createReadStream(__dirname + '/fixtures/empty.csv');
     parse(stream, function(err, trip) {
       should.not.exist(err);
@@ -79,7 +80,7 @@ describe('furkot import csv', function() {
     });
   });
 
-  it('should parse empty driving log csv', function(done) {
+  it('should parse empty driving log csv', function(t, done) {
     var stream = fs.createReadStream(__dirname + '/fixtures/empty-driving-log.csv');
     parse(stream, function(err, trip) {
       should.not.exist(err);
@@ -88,7 +89,7 @@ describe('furkot import csv', function() {
     });
   });
 
-  it('should raise error on unquoted csv file', function(done) {
+  it('should raise error on unquoted csv file', function(t, done) {
     var stream = fs.createReadStream(__dirname + '/fixtures/unquoted.csv');
     parse(stream, function(err, trip) {
       should.exist(err);
@@ -100,7 +101,7 @@ describe('furkot import csv', function() {
     });
   });
 
-  it('should raise error on invalid csv file', function(done) {
+  it('should raise error on invalid csv file', function(t, done) {
     var stream = fs.createReadStream(__dirname + '/fixtures/invalid.csv');
     parse(stream, function(err, trip) {
       should.exist(err);

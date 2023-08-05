@@ -19,7 +19,6 @@
   },
   "devDependencies": {
     "jshint": "~2",
-    "mocha": "~3",
     "should": "~11"
   },
   "scripts": {
