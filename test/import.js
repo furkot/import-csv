@@ -1,5 +1,6 @@
 const { describe, it } = require('node:test');
-const should = require('should');
+const assert = require('node:assert/strict');
+
 const fs = require('fs');
 const parse = require('..');
 
@@ -9,9 +10,8 @@ describe('furkot import csv', function () {
     const stream = fs.createReadStream(__dirname + '/fixtures/italy.csv');
     parse(stream, function (err, trip) {
       const expected = require('./fixtures/italy.json');
-      should.exist(trip);
-      should.not.exist(err);
-      trip.should.eql(expected);
+      assert.ifError(err);
+      assert.deepEqual(trip, expected);
       done();
     });
   });
@@ -20,9 +20,8 @@ describe('furkot import csv', function () {
     const stream = fs.createReadStream(__dirname + '/fixtures/italy-no-header.csv');
     parse(stream, function (err, trip) {
       const expected = require('./fixtures/italy.json');
-      should.exist(trip);
-      should.not.exist(err);
-      trip.should.eql(expected);
+      assert.ifError(err);
+      assert.deepEqual(trip, expected);
       done();
     });
   });
@@ -31,9 +30,8 @@ describe('furkot import csv', function () {
     const stream = fs.createReadStream(__dirname + '/fixtures/duration.csv');
     parse(stream, function (err, trip) {
       const expected = require('./fixtures/duration.json');
-      should.exist(trip);
-      should.not.exist(err);
-      trip.should.eql(expected);
+      assert.ifError(err);
+      assert.deepEqual(trip, expected);
       done();
     });
   });
@@ -42,9 +40,8 @@ describe('furkot import csv', function () {
     const stream = fs.createReadStream(__dirname + '/fixtures/no-coords-cap-header.csv');
     parse(stream, function (err, trip) {
       const expected = require('./fixtures/no-coords-cap-header.json');
-      should.exist(trip);
-      should.not.exist(err);
-      trip.should.eql(expected);
+      assert.ifError(err);
+      assert.deepEqual(trip, expected);
       done();
     });
   });
@@ -53,9 +50,8 @@ describe('furkot import csv', function () {
     const stream = fs.createReadStream(__dirname + '/fixtures/garmin-poi.csv');
     parse(stream, function (err, trip) {
       const expected = require('./fixtures/garmin-poi.json');
-      should.exist(trip);
-      should.not.exist(err);
-      trip.should.eql(expected);
+      assert.ifError(err);
+      assert.deepEqual(trip, expected);
       done();
     });
   });
@@ -64,9 +60,8 @@ describe('furkot import csv', function () {
     const stream = fs.createReadStream(__dirname + '/fixtures/driving-log.csv');
     parse(stream, function (err, trip) {
       const expected = require('./fixtures/driving-log.json');
-      should.exist(trip);
-      should.not.exist(err);
-      trip.should.eql(expected);
+      assert.ifError(err);
+      assert.deepEqual(trip, expected);
       done();
     });
   });
@@ -74,8 +69,8 @@ describe('furkot import csv', function () {
   it('should parse empty csv', function (t, done) {
     const stream = fs.createReadStream(__dirname + '/fixtures/empty.csv');
     parse(stream, function (err, trip) {
-      should.not.exist(err);
-      trip.should.eql({});
+      assert.ifError(err);
+      assert.deepEqual(trip, {});
       done();
     });
   });
@@ -83,8 +78,8 @@ describe('furkot import csv', function () {
   it('should parse empty driving log csv', function (t, done) {
     const stream = fs.createReadStream(__dirname + '/fixtures/empty-driving-log.csv');
     parse(stream, function (err, trip) {
-      should.not.exist(err);
-      trip.should.eql({});
+      assert.ifError(err);
+      assert.deepEqual(trip, {});
       done();
     });
   });
@@ -92,11 +87,11 @@ describe('furkot import csv', function () {
   it('should raise error on unquoted csv file', function (t, done) {
     const stream = fs.createReadStream(__dirname + '/fixtures/unquoted.csv');
     parse(stream, function (err, trip) {
-      should.exist(err);
-      err.should.have.property('err', 'invalid');
-      err.should.have.property('message');
-      err.should.not.have.property('status');
-      should.not.exist(trip);
+      assert.ok(err);
+      assert.equal(err.err, 'invalid');
+      assert.ok(err.message);
+      assert.ok(!err.status);
+      assert.ok(!trip);
       done();
     });
   });
@@ -104,11 +99,11 @@ describe('furkot import csv', function () {
   it('should raise error on invalid csv file', function (t, done) {
     const stream = fs.createReadStream(__dirname + '/fixtures/invalid.csv');
     parse(stream, function (err, trip) {
-      should.exist(err);
-      err.should.have.property('err', 'invalid');
-      err.should.have.property('message');
-      err.should.not.have.property('status');
-      should.not.exist(trip);
+      assert.ok(err);
+      assert.equal(err.err, 'invalid');
+      assert.ok(err.message);
+      assert.ok(!err.status);
+      assert.ok(!trip);
       done();
     });
   });
