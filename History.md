@@ -1,4 +1,13 @@
 
+2.0.0 / 2023-08-05
+==================
+
+ * upgrade csv-parser to 5.4.0
+ * replace Travis CI with github actions
+ * replace should with assert
+ * modernize and format code
+ * replace mocha with node:test
+
 1.1.3 / 2019-07-13
 ==================
 
