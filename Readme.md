@@ -1,6 +1,6 @@
 [![NPM version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Dependency Status][gemnasium-image]][gemnasium-url]
+[![Build Status][build-image]][build-url]
+[![Dependency Status][deps-image]][deps-url]
 
 # furkot-import-csv
 
@@ -54,11 +54,11 @@ MIT © [code42day](https://code42day.com)
 [CSV]: http://en.wikipedia.org/wiki/Comma-separated_values
 [icons]: https://furkot.github.io/icon-fonts/build/furkot.html
 
-[npm-image]: https://img.shields.io/npm/v/furkot-import-csv.svg
+[npm-image]: https://img.shields.io/npm/v/furkot-import-csv
 [npm-url]: https://npmjs.org/package/furkot-import-csv
 
-[travis-url]: https://travis-ci.org/furkot/import-csv
-[travis-image]: https://img.shields.io/travis/furkot/import-csv.svg
+[build-url]: https://github.com/furkot/import-csv/actions/workflows/check.yaml
+[build-image]: https://img.shields.io/github/actions/workflow/status/furkot/import-csv/check.yaml?branch=main
 
-[gemnasium-image]: https://img.shields.io/gemnasium/furkot/import-csv.svg
-[gemnasium-url]: https://gemnasium.com/furkot/import-csv
+[deps-image]: https://img.shields.io/librariesio/release/npm/furkot-import-csv
+[deps-url]: https://libraries.io/npm/furkot-import-csv

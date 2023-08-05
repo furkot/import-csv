@@ -1,113 +1,103 @@
-var should = require('should');
-var fs = require('fs');
-var parse = require('..');
+const { describe, it } = require('node:test');
+const assert = require('node:assert/strict');
 
-describe('furkot import csv', function() {
+const fs = require('fs');
+const parse = require('..');
 
-  it('should parse csv', function(done) {
-    var stream = fs.createReadStream(__dirname + '/fixtures/italy.csv');
-    parse(stream, function(err, trip) {
-      var expected = require('./fixtures/italy.json');
-      should.exist(trip);
-      should.not.exist(err);
-      trip.should.eql(expected);
+describe('furkot import csv', function () {
+
+  it('should parse csv', function (t, done) {
+    const stream = fs.createReadStream(__dirname + '/fixtures/italy.csv');
+    parse(stream, function (err, trip) {
+      const expected = require('./fixtures/italy.json');
+      assert.ifError(err);
+      assert.deepEqual(trip, expected);
       done();
     });
   });
 
-  it('should parse csv without header', function(done) {
-    var stream = fs.createReadStream(__dirname + '/fixtures/italy-no-header.csv');
-    parse(stream, function(err, trip) {
-      var expected = require('./fixtures/italy.json');
-      should.exist(trip);
-      should.not.exist(err);
-      trip.should.eql(expected);
+  it('should parse csv without header', function (t, done) {
+    const stream = fs.createReadStream(__dirname + '/fixtures/italy-no-header.csv');
+    parse(stream, function (err, trip) {
+      const expected = require('./fixtures/italy.json');
+      assert.ifError(err);
+      assert.deepEqual(trip, expected);
       done();
     });
   });
 
-  it('should parse csv with duration', function(done) {
-    var stream = fs.createReadStream(__dirname + '/fixtures/duration.csv');
-    parse(stream, function(err, trip) {
-      var expected = require('./fixtures/duration.json');
-      should.exist(trip);
-      should.not.exist(err);
-      trip.should.eql(expected);
+  it('should parse csv with duration', function (t, done) {
+    const stream = fs.createReadStream(__dirname + '/fixtures/duration.csv');
+    parse(stream, function (err, trip) {
+      const expected = require('./fixtures/duration.json');
+      assert.ifError(err);
+      assert.deepEqual(trip, expected);
       done();
     });
   });
 
-  it('should parse csv without coordinates', function(done) {
-    var stream = fs.createReadStream(__dirname + '/fixtures/no-coords-cap-header.csv');
-    parse(stream, function(err, trip) {
-      var expected = require('./fixtures/no-coords-cap-header.json');
-      should.exist(trip);
-      should.not.exist(err);
-      trip.should.eql(expected);
+  it('should parse csv without coordinates', function (t, done) {
+    const stream = fs.createReadStream(__dirname + '/fixtures/no-coords-cap-header.csv');
+    parse(stream, function (err, trip) {
+      const expected = require('./fixtures/no-coords-cap-header.json');
+      assert.ifError(err);
+      assert.deepEqual(trip, expected);
       done();
     });
   });
 
-  it('should parse csv in Garmin custom POI format', function(done) {
-    var stream = fs.createReadStream(__dirname + '/fixtures/garmin-poi.csv');
-    parse(stream, function(err, trip) {
-      var expected = require('./fixtures/garmin-poi.json');
-      should.exist(trip);
-      should.not.exist(err);
-      trip.should.eql(expected);
+  it('should parse csv in Garmin custom POI format', function (t, done) {
+    const stream = fs.createReadStream(__dirname + '/fixtures/garmin-poi.csv');
+    parse(stream, function (err, trip) {
+      const expected = require('./fixtures/garmin-poi.json');
+      assert.ifError(err);
+      assert.deepEqual(trip, expected);
       done();
     });
   });
 
-  it('should parse driving log csv', function(done) {
-    var stream = fs.createReadStream(__dirname + '/fixtures/driving-log.csv');
-    parse(stream, function(err, trip) {
-      var expected = require('./fixtures/driving-log.json');
-      should.exist(trip);
-      should.not.exist(err);
-      trip.should.eql(expected);
+  it('should parse driving log csv', function (t, done) {
+    const stream = fs.createReadStream(__dirname + '/fixtures/driving-log.csv');
+    parse(stream, function (err, trip) {
+      const expected = require('./fixtures/driving-log.json');
+      assert.ifError(err);
+      assert.deepEqual(trip, expected);
       done();
     });
   });
 
-  it('should parse empty csv', function(done) {
-    var stream = fs.createReadStream(__dirname + '/fixtures/empty.csv');
-    parse(stream, function(err, trip) {
-      should.not.exist(err);
-      trip.should.eql({});
+  it('should parse empty csv', function (t, done) {
+    const stream = fs.createReadStream(__dirname + '/fixtures/empty.csv');
+    parse(stream, function (err, trip) {
+      assert.ifError(err);
+      assert.deepEqual(trip, {});
       done();
     });
   });
 
-  it('should parse empty driving log csv', function(done) {
-    var stream = fs.createReadStream(__dirname + '/fixtures/empty-driving-log.csv');
-    parse(stream, function(err, trip) {
-      should.not.exist(err);
-      trip.should.eql({});
+  it('should parse empty driving log csv', function (t, done) {
+    const stream = fs.createReadStream(__dirname + '/fixtures/empty-driving-log.csv');
+    parse(stream, function (err, trip) {
+      assert.ifError(err);
+      assert.deepEqual(trip, {});
       done();
     });
   });
 
-  it('should raise error on unquoted csv file', function(done) {
-    var stream = fs.createReadStream(__dirname + '/fixtures/unquoted.csv');
-    parse(stream, function(err, trip) {
-      should.exist(err);
-      err.should.have.property('err', 'invalid');
-      err.should.have.property('message');
-      err.should.not.have.property('status');
-      should.not.exist(trip);
+  it('should raise error on unquoted csv file', function (t, done) {
+    const stream = fs.createReadStream(__dirname + '/fixtures/unquoted.csv');
+    parse(stream, function (err, trip) {
+      assert.equal(err?.code, 'CSV_RECORD_INCONSISTENT_COLUMNS');
+      assert.ok(!trip);
       done();
     });
   });
 
-  it('should raise error on invalid csv file', function(done) {
-    var stream = fs.createReadStream(__dirname + '/fixtures/invalid.csv');
-    parse(stream, function(err, trip) {
-      should.exist(err);
-      err.should.have.property('err', 'invalid');
-      err.should.have.property('message');
-      err.should.not.have.property('status');
-      should.not.exist(trip);
+  it('should raise error on invalid csv file', function (t, done) {
+    const stream = fs.createReadStream(__dirname + '/fixtures/invalid.csv');
+    parse(stream, function (err, trip) {
+      assert.equal(err?.code, 'CSV_INVALID_COLUMN_MAPPING');
+      assert.ok(!trip);
       done();
     });
   });
