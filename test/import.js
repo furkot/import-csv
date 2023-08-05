@@ -87,10 +87,7 @@ describe('furkot import csv', function () {
   it('should raise error on unquoted csv file', function (t, done) {
     const stream = fs.createReadStream(__dirname + '/fixtures/unquoted.csv');
     parse(stream, function (err, trip) {
-      assert.ok(err);
-      assert.equal(err.err, 'invalid');
-      assert.ok(err.message);
-      assert.ok(!err.status);
+      assert.equal(err?.code, 'CSV_RECORD_INCONSISTENT_COLUMNS');
       assert.ok(!trip);
       done();
     });
@@ -99,10 +96,7 @@ describe('furkot import csv', function () {
   it('should raise error on invalid csv file', function (t, done) {
     const stream = fs.createReadStream(__dirname + '/fixtures/invalid.csv');
     parse(stream, function (err, trip) {
-      assert.ok(err);
-      assert.equal(err.err, 'invalid');
-      assert.ok(err.message);
-      assert.ok(!err.status);
+      assert.equal(err?.code, 'CSV_INVALID_COLUMN_MAPPING');
       assert.ok(!trip);
       done();
     });
