@@ -17,14 +17,12 @@ $ npm install --save furkot-import-csv
 Use as a transform stream: pipe network responses, files etc. and listen on `data` event.
 
 ```js
-var furkotImportCsv = require('furkot-import-csv');
-var request = require('getlet');
+const furkotImportCsv = require('@furkot/import-csv');
+const { body } = await fetch('https://example.com/my.csv');
+const from = body.pipeThrough(new TextDecoderStream());
+const trip = await furkotImportCsv(from);
 
-request('https://example.com/my.csv')
-  .pipe(furkotImportCsv)
-  .on('data', function(trip) {
-    console.log(trip);
-  });
+console.log(trip);
 ```
 
 ## Format
