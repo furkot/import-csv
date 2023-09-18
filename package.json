@@ -1,5 +1,5 @@
 {
-  "name": "furkot-import-csv",
+  "name": "@furkot/import-csv",
   "version": "2.0.0",
   "description": "Import CSV files into node.",
   "author": {
@@ -15,7 +15,7 @@
     "furkot"
   ],
   "dependencies": {
-    "csv-parse": "^5.4.0"
+    "@pirxpilot/csv-parse": "^0.1.0"
   },
   "devDependencies": {
     "jshint": "~2"

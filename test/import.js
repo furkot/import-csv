@@ -1,104 +1,79 @@
-const { describe, it } = require('node:test');
+const test = require('node:test');
 const assert = require('node:assert/strict');
 
-const fs = require('fs');
+const fs = require('node:fs/promises');
+const path = require('node:path');
+
 const parse = require('..');
 
-describe('furkot import csv', function () {
+/* global TextDecoderStream */
 
-  it('should parse csv', function (t, done) {
-    const stream = fs.createReadStream(__dirname + '/fixtures/italy.csv');
-    parse(stream, function (err, trip) {
-      const expected = require('./fixtures/italy.json');
-      assert.ifError(err);
-      assert.deepEqual(trip, expected);
-      done();
-    });
-  });
+async function createFromStream(file) {
+  const name = path.join(__dirname, file);
+  const handle = await fs.open(name);
+  return handle.readableWebStream().pipeThrough(new TextDecoderStream());
+}
 
-  it('should parse csv without header', function (t, done) {
-    const stream = fs.createReadStream(__dirname + '/fixtures/italy-no-header.csv');
-    parse(stream, function (err, trip) {
-      const expected = require('./fixtures/italy.json');
-      assert.ifError(err);
-      assert.deepEqual(trip, expected);
-      done();
-    });
-  });
+test('should parse csv', async function () {
+  const stream = await createFromStream('/fixtures/italy.csv');
+  const trip = await parse(stream);
+  const expected = require('./fixtures/italy.json');
+  assert.deepEqual(trip, expected);
+});
 
-  it('should parse csv with duration', function (t, done) {
-    const stream = fs.createReadStream(__dirname + '/fixtures/duration.csv');
-    parse(stream, function (err, trip) {
-      const expected = require('./fixtures/duration.json');
-      assert.ifError(err);
-      assert.deepEqual(trip, expected);
-      done();
-    });
-  });
+test('should parse csv without header', async function () {
+  const stream = await createFromStream('/fixtures/italy-no-header.csv');
+  const trip = await parse(stream);
+  const expected = require('./fixtures/italy.json');
+  assert.deepEqual(trip, expected);
+});
 
-  it('should parse csv without coordinates', function (t, done) {
-    const stream = fs.createReadStream(__dirname + '/fixtures/no-coords-cap-header.csv');
-    parse(stream, function (err, trip) {
-      const expected = require('./fixtures/no-coords-cap-header.json');
-      assert.ifError(err);
-      assert.deepEqual(trip, expected);
-      done();
-    });
-  });
+test('should parse csv with duration', async function () {
+  const stream = await createFromStream('/fixtures/duration.csv');
+  const trip = await parse(stream);
+  const expected = require('./fixtures/duration.json');
+  assert.deepEqual(trip, expected);
+});
 
-  it('should parse csv in Garmin custom POI format', function (t, done) {
-    const stream = fs.createReadStream(__dirname + '/fixtures/garmin-poi.csv');
-    parse(stream, function (err, trip) {
-      const expected = require('./fixtures/garmin-poi.json');
-      assert.ifError(err);
-      assert.deepEqual(trip, expected);
-      done();
-    });
-  });
+test('should parse csv without coordinates', async function () {
+  const stream = await createFromStream('/fixtures/no-coords-cap-header.csv');
+  const trip = await parse(stream);
+  const expected = require('./fixtures/no-coords-cap-header.json');
+  assert.deepEqual(trip, expected);
+});
 
-  it('should parse driving log csv', function (t, done) {
-    const stream = fs.createReadStream(__dirname + '/fixtures/driving-log.csv');
-    parse(stream, function (err, trip) {
-      const expected = require('./fixtures/driving-log.json');
-      assert.ifError(err);
-      assert.deepEqual(trip, expected);
-      done();
-    });
-  });
+test('should parse csv in Garmin custom POI format', async function () {
+  const stream = await createFromStream('/fixtures/garmin-poi.csv');
+  const trip = await parse(stream);
+  const expected = require('./fixtures/garmin-poi.json');
+  assert.deepEqual(trip, expected);
+});
 
-  it('should parse empty csv', function (t, done) {
-    const stream = fs.createReadStream(__dirname + '/fixtures/empty.csv');
-    parse(stream, function (err, trip) {
-      assert.ifError(err);
-      assert.deepEqual(trip, {});
-      done();
-    });
-  });
+test('should parse driving log csv', async function () {
+  const stream = await createFromStream('/fixtures/driving-log.csv');
+  const trip = await parse(stream);
+  const expected = require('./fixtures/driving-log.json');
+  assert.deepEqual(trip, expected);
+});
 
-  it('should parse empty driving log csv', function (t, done) {
-    const stream = fs.createReadStream(__dirname + '/fixtures/empty-driving-log.csv');
-    parse(stream, function (err, trip) {
-      assert.ifError(err);
-      assert.deepEqual(trip, {});
-      done();
-    });
-  });
+test('should parse empty csv', async function () {
+  const stream = await createFromStream('/fixtures/empty.csv');
+  const trip = await parse(stream);
+  assert.deepEqual(trip, {});
+});
 
-  it('should raise error on unquoted csv file', function (t, done) {
-    const stream = fs.createReadStream(__dirname + '/fixtures/unquoted.csv');
-    parse(stream, function (err, trip) {
-      assert.equal(err?.code, 'CSV_RECORD_INCONSISTENT_COLUMNS');
-      assert.ok(!trip);
-      done();
-    });
-  });
+test('should parse empty driving log csv', async function () {
+  const stream = await createFromStream('/fixtures/empty-driving-log.csv');
+  const trip = await parse(stream);
+  assert.deepEqual(trip, {});
+});
 
-  it('should raise error on invalid csv file', function (t, done) {
-    const stream = fs.createReadStream(__dirname + '/fixtures/invalid.csv');
-    parse(stream, function (err, trip) {
-      assert.equal(err?.code, 'CSV_INVALID_COLUMN_MAPPING');
-      assert.ok(!trip);
-      done();
-    });
-  });
+test('should raise error on unquoted csv file', async function () {
+  const stream = await createFromStream('/fixtures/unquoted.csv');
+  await assert.rejects(parse(stream), { cause: 'CSV_RECORD_INCONSISTENT_COLUMNS' });
+});
+
+test('should raise error on invalid csv file', async function () {
+  const stream = await createFromStream('/fixtures/invalid.csv');
+  await assert.rejects(parse(stream), { cause: 'CSV_INVALID_COLUMN_MAPPING' });
 });

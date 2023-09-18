@@ -2,7 +2,7 @@
 [![Build Status][build-image]][build-url]
 [![Dependency Status][deps-image]][deps-url]
 
-# furkot-import-csv
+# @furkot/import-csv
 
 Import [CSV] files into [Furkot] road trip planner.
 
@@ -17,14 +17,12 @@ $ npm install --save furkot-import-csv
 Use as a transform stream: pipe network responses, files etc. and listen on `data` event.
 
 ```js
-var furkotImportCsv = require('furkot-import-csv');
-var request = require('getlet');
+const furkotImportCsv = require('@furkot/import-csv');
+const { body } = await fetch('https://example.com/my.csv');
+const from = body.pipeThrough(new TextDecoderStream());
+const trip = await furkotImportCsv(from);
 
-request('https://example.com/my.csv')
-  .pipe(furkotImportCsv)
-  .on('data', function(trip) {
-    console.log(trip);
-  });
+console.log(trip);
 ```
 
 ## Format
@@ -54,11 +52,11 @@ MIT © [code42day](https://code42day.com)
 [CSV]: http://en.wikipedia.org/wiki/Comma-separated_values
 [icons]: https://furkot.github.io/icon-fonts/build/furkot.html
 
-[npm-image]: https://img.shields.io/npm/v/furkot-import-csv
-[npm-url]: https://npmjs.org/package/furkot-import-csv
+[npm-image]: https://img.shields.io/npm/v/@furkot/import-csv
+[npm-url]: https://npmjs.org/package/@furkot/import-csv
 
 [build-url]: https://github.com/furkot/import-csv/actions/workflows/check.yaml
 [build-image]: https://img.shields.io/github/actions/workflow/status/furkot/import-csv/check.yaml?branch=main
 
-[deps-image]: https://img.shields.io/librariesio/release/npm/furkot-import-csv
-[deps-url]: https://libraries.io/npm/furkot-import-csv
+[deps-image]: https://img.shields.io/librariesio/release/npm/@furkot/import-csv
+[deps-url]: https://libraries.io/npm/@furkot%2Fimport-csv
