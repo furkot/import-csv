@@ -1,4 +1,10 @@
 
+3.0.0 / 2023-09-18
+==================
+
+ * use @pirxpilot/csv-parse to enable client side usage
+ * rename to @furkot/import-csv
+
 2.0.0 / 2023-08-05
 ==================
 
