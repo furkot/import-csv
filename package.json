@@ -2,12 +2,17 @@
   "name": "@furkot/import-csv",
   "version": "3.0.0",
   "description": "Import CSV files into node.",
+  "type": "module",
+  "exports": "./lib/import.js",
   "author": {
     "name": "Damian Krzeminski",
     "email": "pirxpilot@code42day.com",
     "url": "https://code42day.com"
   },
-  "repository": "furkot/import-csv",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/furkot/import-csv.git"
+  },
   "license": "MIT",
   "keywords": [
     "furkot-import-csv",
@@ -15,16 +20,15 @@
     "furkot"
   ],
   "dependencies": {
-    "@pirxpilot/csv-parse": "^0.1.0"
+    "@pirxpilot/csv-parse": "~1"
   },
   "devDependencies": {
-    "jshint": "~2"
+    "@biomejs/biome": "^1.9.4"
   },
   "scripts": {
     "test": "make check"
   },
   "files": [
-    "index.js",
     "lib"
   ]
 }
