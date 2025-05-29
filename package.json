@@ -20,7 +20,7 @@
     "furkot"
   ],
   "dependencies": {
-    "@pirxpilot/csv-parse": "^0.1.0"
+    "@pirxpilot/csv-parse": "~1"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4"
